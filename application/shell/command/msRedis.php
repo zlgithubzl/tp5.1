@@ -8,13 +8,13 @@
     class msRedis extends Command{
 	protected function execute($input,$output){
 	    $db = \Db::name('ms_goods');
-	    $now = date('Y-m-d H:i:s',time())
+	    $now = date('Y-m-d H:i:s',time());
 	    $time = date('Y-m-d H:i:s',strtotime("$now +1 days"));
 	    $ms_p = $db->where('start_date="'.$time.'"')->select();
 	    //存入redis
 	    $redis = new \Redis();
 	    foreach($ms_p as $k=>$v){
-		$redis->hset('ms_p_'.$v['id'])
+		$redis->hset('ms_p_'.$v['id']);
 		
 	    }
 	}
