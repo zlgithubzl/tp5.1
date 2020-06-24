@@ -26,15 +26,15 @@
 	   $offset = intval((time()-strtotime($signStartTime))/86400);
 	    //$redis->setBit($cacheKey,$offset,1);
 	   // $bitStatus = $redis->getBit($cacheKey,$offset);
-	    $signCount = $redis->bitCount($cacheKey);
-	    return $signCount;
+	    //$signCount = $redis->bitCount($cacheKey);
+	    //return $signCount;
 	   //$key_value = $redis->get('name');
-	   return $bitStatus;
+	   ///return $bitStatus;
 
 
-	   die;
-	   include_once  __DIR__.'/../../../my_vendor/DaemonCommand.php';
-	$daemon=new \my_vendor\DaemonCommand(true);
+	   //die;
+	  // include_once  __DIR__.'/../../../my_vendor/DaemonCommand.php';
+	$daemon=new \DaemonCommand(true);
 	$daemon->daemonize();
 	$daemon->start(2);//开启2个子进程工作
 	echo '进程id:'.posix_getpid().";父进程：".posix_getppid().'\r\n';
