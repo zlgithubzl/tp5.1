@@ -11,4 +11,6 @@
 
 return [
     'app\shell\command\msRedis',
+    //'reUpdateDbData'=>'app\common\command\getData',
+    'reUpdateDbData'=>'app\common\command\reUpdateDbData',
 ];

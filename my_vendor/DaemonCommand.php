@@ -1,4 +1,5 @@
 <?php
+namespace my_vendor;
 /**
  *@author tengzhaorong@gmail.com
  *@date 2013-07-25
