@@ -16,16 +16,18 @@
 	   if($pid = -1){
 	     exit('fork failed');//此处可以优化为自定义异常
 	   }elseif($pid>0){
-	   
+
 	   }else{
 	    //子进程
-	    $s_pname = $p_name."_s_".$child_num;
+           echo "子进程已启动/r/n";
+	    $s_pname = $p_pname."_s_".$child_num;
 	    cli_set_process_name($s_pname);//设置子进程名称
 	    if($this->signal_handlers){
-		foreach($this->signal_handlers as $signal=>$callback){
-		    pcntl_signal($signal,$callback);
-		};
+            foreach($this->signal_handlers as $signal=>$callback){
+                pcntl_signal($signal,$callback);
+            };
 	    }
+	    sleep(15);
 	    echo '子进程：'.$s_pname.'马上退出，bye'."/r/n";
 	    
 	   }
@@ -39,7 +41,7 @@
 	 *@param $callback 信号处理函数
 	 */
 	public function registerSignalHandler($signal,$callback){
-	    $this->signal_handlers[$signal,$callback];
+	    $this->signal_handlers[$signal] = $callback;
 	}
 
 	/**
@@ -49,7 +51,12 @@
 	 */
 	public function wait($block=true)
 	{
-	
+	    if(true === $block){
+	        pcntl_wait($status);
+        }else{
+	        pcntl_wait($status,WNOHANG|WUNTRACED);
+        }
+        echo '父进程即将退出';
 	}
 	
 	
