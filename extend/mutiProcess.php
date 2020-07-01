@@ -18,9 +18,9 @@
 	   if($pid == -1){
 	     exit('fork failed');//此处可以优化为自定义异常
 	   }elseif($pid>0){
-	   die;echo 2;
-		exit(0);
-		$this->wait(false);
+    		$this->wait(true);
+		sleep(30);
+
 		exit;
 	   }else{
 	    //子进程
@@ -47,6 +47,11 @@
 	 */
 	public function registerSignalHandler($signal,$callback){
 	    $this->signal_handlers[$signal] = $callback;
+	}
+
+	private function signalHandler()
+	{
+	    	
 	}
 
 	/**
