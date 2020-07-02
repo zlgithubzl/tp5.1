@@ -26,8 +26,8 @@
     	    $this->cid = $pid;
     	    $this->isRunning = true;    //  子进程状态
            //由主进程循环while调用wait来进行子进程回收优化为信号通知回收(探究可行性，子进程异常退出会通知主进程吗？？)。
-            pcntl_signal();
-            pcntl_signal();
+            //pcntl_signal();
+            //pcntl_signal();
 	   }else{
 	    //子进程
            echo "子进程已启动\r\n";
@@ -38,9 +38,10 @@
                 pcntl_signal($signal,$callback);
             };
 	    }
+	    //call_user_func()
 	    sleep(15);
 	    echo '子进程：'.$s_pname.'马上退出，bye'."\r\n";
-	    
+	    exit();
 	   }
 
 	}
