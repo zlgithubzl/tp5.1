@@ -99,11 +99,14 @@
 
 	private function getChildStatus($pid,$status){
         if(false === pcntl_wifexited($status)){
-            echo '子进程：'.$pid.'异常退出，错误代码'.pcntl_wexitstatus($status)."\r\n";
-        }elseif(true === pcntl_wifsignaled()){
-            echo '子进程：'.$pid.'因为信号：'.pcntl_wtermsig($status).'而退出'."\r\n";
-        }elseif(true === pcntl_wifstopped()){
-            echo '子进程：'.$pid.'因为信号：'.pcntl_wstopsig($status).'而停止'."\r\n";
+            $msg = pcntl_strerror(pcntl_wexitstatus($status));
+            echo '子进程：'.$pid.'异常退出，错误代码'.$msg."\r\n";
+        }elseif(true === pcntl_wifsignaled($status)){
+            $msg = pcntl_strerror(pcntl_wtermsig($status));
+            echo '子进程：'.$pid.'因为信号：'.$msg.'而退出'."\r\n";
+        }elseif(true === pcntl_wifstopped($status)){
+            $msg = pcntl_strerror(pcntl_wstopsig($status));
+            echo '子进程：'.$pid.'因为信号：'.pcntl_wstopsig($msg).'而停止'."\r\n";
         }
         $this->isRunning = false;
     }
