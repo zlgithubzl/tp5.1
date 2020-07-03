@@ -82,6 +82,13 @@
         }
 	}
 
+    /**
+     *
+     */
+	public function waitAllChild($block=true,$usleep=1000){
+
+    }
+
         /**
          * @param bool $block
          */
